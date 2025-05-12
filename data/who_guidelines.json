@@ -1,0 +1,128 @@
+{
+  "ph": {
+    "range": [
+      0,
+      0
+    ],
+    "measures": {
+      "low": [
+        "Placeholder recommendation for low values"
+      ],
+      "high": [
+        "Placeholder recommendation for high values"
+      ]
+    }
+  },
+  "hardness": {
+    "range": [
+      0,
+      0
+    ],
+    "measures": {
+      "low": [
+        "Placeholder recommendation for low values"
+      ],
+      "high": [
+        "Placeholder recommendation for high values"
+      ]
+    }
+  },
+  "solids": {
+    "range": [
+      0,
+      0
+    ],
+    "measures": {
+      "low": [
+        "Placeholder recommendation for low values"
+      ],
+      "high": [
+        "Placeholder recommendation for high values"
+      ]
+    }
+  },
+  "chloramines": {
+    "range": [
+      0,
+      0
+    ],
+    "measures": {
+      "low": [
+        "Placeholder recommendation for low values"
+      ],
+      "high": [
+        "Placeholder recommendation for high values"
+      ]
+    }
+  },
+  "sulfate": {
+    "range": [
+      0,
+      0
+    ],
+    "measures": {
+      "low": [
+        "Placeholder recommendation for low values"
+      ],
+      "high": [
+        "Placeholder recommendation for high values"
+      ]
+    }
+  },
+  "conductivity": {
+    "range": [
+      0,
+      0
+    ],
+    "measures": {
+      "low": [
+        "Placeholder recommendation for low values"
+      ],
+      "high": [
+        "Placeholder recommendation for high values"
+      ]
+    }
+  },
+  "organic carbon": {
+    "range": [
+      0,
+      0
+    ],
+    "measures": {
+      "low": [
+        "Placeholder recommendation for low values"
+      ],
+      "high": [
+        "Placeholder recommendation for high values"
+      ]
+    }
+  },
+  "trihalomethanes": {
+    "range": [
+      0,
+      0
+    ],
+    "measures": {
+      "low": [
+        "Placeholder recommendation for low values"
+      ],
+      "high": [
+        "Placeholder recommendation for high values"
+      ]
+    }
+  },
+  "turbidity": {
+    "range": [
+      0,
+      0
+    ],
+    "measures": {
+      "low": [
+        "Placeholder recommendation for low values"
+      ],
+      "high": [
+        "Placeholder recommendation for high values"
+      ]
+    }
+  }
+}

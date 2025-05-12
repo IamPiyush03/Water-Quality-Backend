@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Water Quality Prediction</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .form-container {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        .result-container {
+            display: none;
+            margin-top: 2rem;
+            padding: 1rem;
+            border-radius: 5px;
+        }
+        .potable {
+            background-color: #d4edda;
+            border-color: #c3e6cb;
+        }
+        .not-potable {
+            background-color: #f8d7da;
+            border-color: #f5c6cb;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="form-container">
+            <h1 class="text-center mb-4">Water Quality Prediction</h1>
+            <form id="predictionForm">
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label for="ph" class="form-label">pH</label>
+                        <input type="number" step="0.1" class="form-control" id="ph" name="ph" required>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="Hardness" class="form-label">Hardness (mg/L)</label>
+                        <input type="number" step="0.1" class="form-control" id="Hardness" name="Hardness" required>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label for="Solids" class="form-label">Solids (ppm)</label>
+                        <input type="number" step="0.1" class="form-control" id="Solids" name="Solids" required>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="Chloramines" class="form-label">Chloramines (ppm)</label>
+                        <input type="number" step="0.1" class="form-control" id="Chloramines" name="Chloramines" required>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label for="Sulfate" class="form-label">Sulfate (mg/L)</label>
+                        <input type="number" step="0.1" class="form-control" id="Sulfate" name="Sulfate" required>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="Conductivity" class="form-label">Conductivity (μS/cm)</label>
+                        <input type="number" step="0.1" class="form-control" id="Conductivity" name="Conductivity" required>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label for="Organic_carbon" class="form-label">Organic Carbon (ppm)</label>
+                        <input type="number" step="0.1" class="form-control" id="Organic_carbon" name="Organic_carbon" required>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="Trihalomethanes" class="form-label">Trihalomethanes (μg/L)</label>
+                        <input type="number" step="0.1" class="form-control" id="Trihalomethanes" name="Trihalomethanes" required>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label for="Turbidity" class="form-label">Turbidity (NTU)</label>
+                        <input type="number" step="0.1" class="form-control" id="Turbidity" name="Turbidity" required>
+                    </div>
+                </div>
+                <div class="text-center">
+                    <button type="submit" class="btn btn-primary">Predict Water Quality</button>
+                </div>
+            </form>
+            
+            <div id="result" class="result-container">
+                <h3 class="text-center">Prediction Result</h3>
+                <p id="resultMessage" class="text-center"></p>
+                <p id="probability" class="text-center"></p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('predictionForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const formData = new FormData(e.target);
+            const data = {};
+            formData.forEach((value, key) => {
+                data[key] = parseFloat(value);
+            });
+            
+            try {
+                const response = await fetch('/predict', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(data)
+                });
+                
+                const result = await response.json();
+                
+                const resultDiv = document.getElementById('result');
+                const resultMessage = document.getElementById('resultMessage');
+                const probability = document.getElementById('probability');
+                
+                resultDiv.style.display = 'block';
+                resultDiv.className = `result-container ${result.is_potable ? 'potable' : 'not-potable'}`;
+                resultMessage.textContent = result.message;
+                probability.textContent = `Confidence: ${(result.probability * 100).toFixed(2)}%`;
+                
+            } catch (error) {
+                console.error('Error:', error);
+                alert('An error occurred while making the prediction.');
+            }
+        });
+    </script>
+</body>
+</html> 
